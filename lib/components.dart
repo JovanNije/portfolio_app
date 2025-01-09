@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -71,3 +73,27 @@ class Poppins extends StatelessWidget {
     return Text(text, style: GoogleFonts.poppins(fontSize: size));
   }
 }
+
+class BorderedTextPoppins extends StatelessWidget {
+  final text;
+  final size;
+  final Color;
+  const BorderedTextPoppins(this.text,this.size,this.Color,{super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color,
+          style: BorderStyle.solid,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      padding: EdgeInsets.all(7.0),
+      child: Poppins(text, size),
+    );
+  }
+}
+
