@@ -133,7 +133,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                   Card(
                       elevation: 20,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
+                          borderRadius: BorderRadius.circular(20.0),
+                          side: BorderSide(color: Colors.greenAccent)),
                       shadowColor: Colors.greenAccent,
                       child: Image.asset("assets/web.jpg",
                           height: heightDevice / 1.7)),
@@ -168,80 +169,41 @@ class _PortfolioWebState extends State<PortfolioWeb> {
               )),
           //third section
           Container(
-            height: heightDevice /1.5,  // You can keep or adjust this height as needed
+            height: heightDevice /
+                1.5, // You can keep or adjust this height as needed
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,  // Changed to 'start' to avoid spaceEvenly issues
+              mainAxisAlignment: MainAxisAlignment
+                  .start, // Changed to 'start' to avoid spaceEvenly issues
               children: [
                 SizedBox(height: 120),
                 PoppinsBold("What i do?", 40),
                 SizedBox(height: 60),
                 Wrap(
-                  spacing: 30,  // Horizontal space between cards
-                  runSpacing: 30,  // Vertical space between rows of cards
+                  spacing: 30, // Horizontal space between cards
+                  runSpacing: 30, // Vertical space between rows of cards
                   children: [
                     // Web Development Card
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3 - 60,  // Make the card's width relative
-                      child: Card(
-                        elevation: 30,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        shadowColor: Colors.greenAccent,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset("assets/webL.png", height: 300, width: double.infinity),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                              child: PoppinsBold("Web development", 15),
-                            ),
-                          ],
-                        ),
-                      ),
+                    AnimatedCardWeb(
+                      imagePath: "assets/flutter.png",
+                      text: "Frontend development",
+                      fit: BoxFit.fill,
+                      reverse: true,
+                      color: Colors.purpleAccent,
                     ),
                     // Firebase Card
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3 - 60,  // Same adjustment here
-                      child: Card(
-                        elevation: 30,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        shadowColor: Colors.blueAccent,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset("assets/firebase.png", height: 300, width: double.infinity),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                              child: PoppinsBold("Firebase", 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    AnimatedCardWeb(
+                        imagePath: "assets/firebase.png",
+                        text: "Databases",
+                        fit: BoxFit.contain,
+                        reverse: true,
+                        color: Colors.blueAccent),
                     // Laravel Card
-                    Container(
-                      width: MediaQuery.of(context).size.width / 3 - 60,  // Again, width adjustment
-                      child: Card(
-                        elevation: 30,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0)),
-                        shadowColor: Colors.redAccent,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.asset("assets/laravel.png", height: 300, width: double.infinity),
-                            SizedBox(height: 10),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                              child: PoppinsBold("Laravel", 15),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    AnimatedCardWeb(
+                        imagePath: "assets/laravel.png",
+                        text: "Backend development",
+                        fit: BoxFit.fill,
+                        reverse: true,
+                        color: Colors.redAccent),
                   ],
                 ),
               ],
@@ -251,9 +213,62 @@ class _PortfolioWebState extends State<PortfolioWeb> {
           Container(
             height: heightDevice,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Center all items vertically
               children: [
-                PoppinsBold("Contact me", 40)
+                PoppinsBold("Contact me", 40),
+                SizedBox(
+                    height:
+                        20), // Adjust space between "Contact me" and the row
+                Row(
+                  mainAxisAlignment:
+                      MainAxisAlignment.center, // Center the row horizontally
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start, // Align items to the top of this column
+                      children: [
+                        InputForm(
+                            text: "Your full Name:", color: Colors.redAccent),
+                        SizedBox(height: 60),
+                        InputForm(
+                            text: "Your number:", color: Colors.redAccent),
+                      ],
+                    ),
+                    SizedBox(
+                        width: 20), // Add some space between the two columns
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start, // Align items to the top of this column
+                      children: [
+                        InputForm(text: "Your email:", color: Colors.redAccent),
+                        SizedBox(height: 60),
+                        InputForm(
+                            text: "Your adress:", color: Colors.redAccent),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 60),
+            Container(
+              width: 500,
+              child: TextFormField(
+                maxLines: 6,
+                focusNode: FocusNode(canRequestFocus: false),
+                decoration: InputDecoration(
+                    hintText: "Enter your message",
+                    hintStyle: GoogleFonts.poppins(fontSize: 14),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.redAccent),
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:  BorderSide(color: Colors.redAccent,width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0))
+                    )
+                ),
+              ),
+            )
               ],
             ),
           )
