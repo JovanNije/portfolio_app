@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -44,6 +43,41 @@ class _TabsWebState extends State<TabsWeb> {
         child: Text(
           widget.title,
         ),
+      ),
+    );
+  }
+}
+
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget{
+  const MyAppBar({super.key});
+
+  @override
+  State<MyAppBar> createState() => _MyAppBarState();
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _MyAppBarState extends State<MyAppBar> {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0.0,
+      iconTheme: IconThemeData(size: 25.0, color: Colors.black),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(child: TabsWeb("Home"),onTap: ()=>{
+            Navigator.pop(context),
+          }),
+          TabsWeb("Works"),
+          TabsWeb("Blog"),
+          GestureDetector(child: TabsWeb("About"),onTap: ()=>{
+            Navigator.of(context).pushNamed("/about")
+          },),
+          TabsWeb("Contact")
+        ],
       ),
     );
   }
@@ -165,7 +199,7 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb> with SingleTickerProv
                 widget.imagePath,
                 height: 300,
                 width: double.infinity,
-                fit: widget.fit == null ? null : widget.fit,
+                fit: widget.fit,
               ),
               SizedBox(height: 10),
               Padding(

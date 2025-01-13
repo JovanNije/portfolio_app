@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protfolio_app/components.dart';
+import 'package:protfolio_app/web/AboutMe.dart';
 
 class PortfolioWeb extends StatefulWidget {
   const PortfolioWeb({super.key});
@@ -16,21 +17,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
     return Scaffold(
         drawer: Drawer(),
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          iconTheme: IconThemeData(size: 25.0, color: Colors.black),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TabsWeb("Home"),
-              TabsWeb("Works"),
-              TabsWeb("Blog"),
-              TabsWeb("About"),
-              TabsWeb("Contact")
-            ],
-          ),
-        ),
+        appBar: MyAppBar(),
         body: ListView(children: [
           //first section
           Container(
