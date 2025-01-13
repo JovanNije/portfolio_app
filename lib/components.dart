@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
-import 'web/portfolio_web.dart';
+import 'package:flutter/material.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -44,50 +45,6 @@ class _TabsWebState extends State<TabsWeb> {
         child: Text(
           widget.title,
         ),
-      ),
-    );
-  }
-}
-
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key});
-
-  @override
-  State<MyAppBar> createState() => _MyAppBarState();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
-}
-
-class _MyAppBarState extends State<MyAppBar> {
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0.0,
-      iconTheme: IconThemeData(size: 25.0, color: Colors.black),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            child: const TabsWeb("Home"),
-            onTap: () {
-              // Check if the current route is not the home route
-              if (ModalRoute.of(context)?.settings.name != '/') {
-                // If we're not on the home route, navigate to the home route
-                Navigator.pushNamed(context, '/');
-              }
-              // If we are on the home route, do nothing (no pop or navigate)
-            },
-          ),
-          TabsWeb("Works"),
-          TabsWeb("Blog"),
-          GestureDetector(
-            child: TabsWeb("About"),
-            onTap: () => {Navigator.of(context).pushNamed("/about")},
-          ),
-          TabsWeb("Contact"),
-        ],
       ),
     );
   }
@@ -195,7 +152,8 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
     return SlideTransition(
       position: _animation,
       child: Container(
-        width: MediaQuery.of(context).size.width / 3 - 150, // Adjust width
+        width: 300, // Adjust width
+        height: 250,
         child: Card(
           elevation: 30,
           shape: RoundedRectangleBorder(
@@ -208,9 +166,9 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
             children: [
               Image.asset(
                 widget.imagePath,
-                height: 300,
+                height: 200,
                 width: double.infinity,
-                fit: widget.fit,
+                fit: widget.fit == null ? null : widget.fit,
               ),
               SizedBox(height: 10),
               Padding(
@@ -229,14 +187,22 @@ class InputForm extends StatelessWidget {
   final text;
   final color;
   final maxlines;
+  final String allowedtext;
   const InputForm(
-      {super.key, @required this.text, @required this.color, this.maxlines});
+      {super.key,
+      @required this.text,
+      @required this.color,
+      this.maxlines,
+      this.allowedtext = "[a-z A-Z 0-9]"});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
       child: TextFormField(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(allowedtext))
+        ],
         maxLines: maxlines,
         focusNode: FocusNode(canRequestFocus: false),
         decoration: InputDecoration(
