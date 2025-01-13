@@ -123,6 +123,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
               ],
             ),
           ),
+          Spacer(),
           //second section
           Container(
               height: heightDevice / 1.1,
@@ -168,21 +169,20 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                 ],
               )),
           //third section
+          Spacer(),
           Container(
-            height: heightDevice /
-                1.5, // You can keep or adjust this height as needed
+            height: heightDevice / 1.5, // Adjust height dynamically if needed
             child: Column(
               mainAxisAlignment: MainAxisAlignment
-                  .start, // Changed to 'start' to avoid spaceEvenly issues
+                  .start, // Align the column items to the start
               children: [
                 SizedBox(height: 120),
-                PoppinsBold("What i do?", 40),
+                PoppinsBold("What I do?", 40),
                 SizedBox(height: 60),
                 Wrap(
-                  spacing: 30, // Horizontal space between cards
+                  spacing: 120, // Horizontal space between cards
                   runSpacing: 30, // Vertical space between rows of cards
                   children: [
-                    // Web Development Card
                     AnimatedCardWeb(
                       imagePath: "assets/flutter.png",
                       text: "Frontend development",
@@ -190,28 +190,29 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       reverse: true,
                       color: Colors.purpleAccent,
                     ),
-                    // Firebase Card
                     AnimatedCardWeb(
-                        imagePath: "assets/firebase.png",
-                        text: "Databases",
-                        fit: BoxFit.contain,
-                        reverse: true,
-                        color: Colors.blueAccent),
-                    // Laravel Card
+                      imagePath: "assets/firebase.png",
+                      text: "Databases",
+                      fit: BoxFit.contain,
+                      reverse: true,
+                      color: Colors.blueAccent,
+                    ),
                     AnimatedCardWeb(
-                        imagePath: "assets/laravel.png",
-                        text: "Backend development",
-                        fit: BoxFit.fill,
-                        reverse: true,
-                        color: Colors.redAccent),
+                      imagePath: "assets/laravel.png",
+                      text: "Backend development",
+                      fit: BoxFit.fill,
+                      reverse: true,
+                      color: Colors.redAccent,
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          //forth section
+          //Forth section
+          Spacer(),
           Container(
-            height: heightDevice,
+            height: heightDevice, // Adjust as needed for the second section
             child: Column(
               mainAxisAlignment:
                   MainAxisAlignment.center, // Center all items vertically
@@ -229,49 +230,69 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                           .start, // Align items to the top of this column
                       children: [
                         InputForm(
-                            text: "Your full Name:", color: Colors.redAccent),
+                            maxlines: 1,
+                            text: "Your full Name:",
+                            color: Colors.redAccent),
                         SizedBox(height: 60),
                         InputForm(
-                            text: "Your number:", color: Colors.redAccent),
+                            maxlines: 1,
+                            allowedtext: "[0-9]",
+                            text: "Your number:",
+                            color: Colors.redAccent),
                       ],
                     ),
-                    SizedBox(
-                        width: 20), // Add some space between the two columns
+                    SizedBox(width: 20), // Space between the two columns
                     Column(
                       mainAxisAlignment: MainAxisAlignment
                           .start, // Align items to the top of this column
                       children: [
-                        InputForm(text: "Your email:", color: Colors.redAccent),
+                        InputForm(
+                            maxlines: 1,
+                            text: "Your email:",
+                            color: Colors.redAccent),
                         SizedBox(height: 60),
                         InputForm(
-                            text: "Your adress:", color: Colors.redAccent),
+                            maxlines: 1,
+                            text: "Your address:",
+                            color: Colors.redAccent),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 60),
-            Container(
-              width: 500,
-              child: TextFormField(
-                maxLines: 6,
-                focusNode: FocusNode(canRequestFocus: false),
-                decoration: InputDecoration(
-                    hintText: "Enter your message",
-                    hintStyle: GoogleFonts.poppins(fontSize: 14),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                Container(
+                  width: 500,
+                  child: TextFormField(
+                    maxLines: 6,
+                    focusNode: FocusNode(canRequestFocus: false),
+                    decoration: InputDecoration(
+                      hintText: "Enter your message",
+                      hintStyle: GoogleFonts.poppins(fontSize: 14),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.redAccent),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.redAccent, width: 2),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:  BorderSide(color: Colors.redAccent,width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0))
-                    )
+                  ),
                 ),
-              ),
-            )
+                SizedBox(height: 60),
+                Container(
+                  height: 70,
+                  width: 70,
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.greenAccent,
+                    onPressed: () => {print("Button pressed")},
+                    child: Icon(Icons.send_rounded),
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ]));
   }
 }

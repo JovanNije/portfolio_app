@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class BorderedTextPoppins extends StatelessWidget {
   final text;
   final size;
   final Color;
-  const BorderedTextPoppins(this.text,this.size,this.Color,{super.key});
+  const BorderedTextPoppins(this.text, this.size, this.Color, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +118,8 @@ class AnimatedCardWeb extends StatefulWidget {
   State<AnimatedCardWeb> createState() => _AnimatedCardWebState();
 }
 
-class _AnimatedCardWebState extends State<AnimatedCardWeb> with SingleTickerProviderStateMixin {
+class _AnimatedCardWebState extends State<AnimatedCardWeb>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
@@ -150,7 +152,8 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb> with SingleTickerProv
     return SlideTransition(
       position: _animation,
       child: Container(
-        width: MediaQuery.of(context).size.width / 3 - 150, // Adjust width
+        width: 300, // Adjust width
+        height: 250,
         child: Card(
           elevation: 30,
           shape: RoundedRectangleBorder(
@@ -163,7 +166,7 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb> with SingleTickerProv
             children: [
               Image.asset(
                 widget.imagePath,
-                height: 300,
+                height: 200,
                 width: double.infinity,
                 fit: widget.fit == null ? null : widget.fit,
               ),
@@ -184,30 +187,35 @@ class InputForm extends StatelessWidget {
   final text;
   final color;
   final maxlines;
-  const InputForm({super.key, @required this.text, @required this.color, this.maxlines});
+  final String allowedtext;
+  const InputForm(
+      {super.key,
+      @required this.text,
+      @required this.color,
+      this.maxlines,
+      this.allowedtext = "[a-z A-Z 0-9]"});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: 300,
       child: TextFormField(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(allowedtext))
+        ],
         maxLines: maxlines,
         focusNode: FocusNode(canRequestFocus: false),
         decoration: InputDecoration(
-          hintText: text,
-          hintStyle: GoogleFonts.poppins(fontSize: 14),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: color),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(color: Colors.redAccent,width: 2),
-            borderRadius: BorderRadius.all(Radius.circular(15.0))
-          )
-        ),
+            hintText: text,
+            hintStyle: GoogleFonts.poppins(fontSize: 14),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: color),
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                borderRadius: BorderRadius.all(Radius.circular(15.0)))),
       ),
     );
   }
 }
-
-
