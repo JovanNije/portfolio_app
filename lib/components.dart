@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
+import 'web/portfolio_web.dart';
 
 class TabsWeb extends StatefulWidget {
   final title;
@@ -48,7 +49,7 @@ class _TabsWebState extends State<TabsWeb> {
   }
 }
 
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget{
+class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MyAppBar({super.key});
 
   @override
@@ -68,15 +69,24 @@ class _MyAppBarState extends State<MyAppBar> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GestureDetector(child: TabsWeb("Home"),onTap: ()=>{
-            Navigator.pop(context),
-          }),
+          GestureDetector(
+            child: const TabsWeb("Home"),
+            onTap: () {
+              // Check if the current route is not the home route
+              if (ModalRoute.of(context)?.settings.name != '/') {
+                // If we're not on the home route, navigate to the home route
+                Navigator.pushNamed(context, '/');
+              }
+              // If we are on the home route, do nothing (no pop or navigate)
+            },
+          ),
           TabsWeb("Works"),
           TabsWeb("Blog"),
-          GestureDetector(child: TabsWeb("About"),onTap: ()=>{
-            Navigator.of(context).pushNamed("/about")
-          },),
-          TabsWeb("Contact")
+          GestureDetector(
+            child: TabsWeb("About"),
+            onTap: () => {Navigator.of(context).pushNamed("/about")},
+          ),
+          TabsWeb("Contact"),
         ],
       ),
     );
@@ -112,7 +122,7 @@ class BorderedTextPoppins extends StatelessWidget {
   final text;
   final size;
   final Color;
-  const BorderedTextPoppins(this.text,this.size,this.Color,{super.key});
+  const BorderedTextPoppins(this.text, this.size, this.Color, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +161,8 @@ class AnimatedCardWeb extends StatefulWidget {
   State<AnimatedCardWeb> createState() => _AnimatedCardWebState();
 }
 
-class _AnimatedCardWebState extends State<AnimatedCardWeb> with SingleTickerProviderStateMixin {
+class _AnimatedCardWebState extends State<AnimatedCardWeb>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
 
@@ -218,30 +229,27 @@ class InputForm extends StatelessWidget {
   final text;
   final color;
   final maxlines;
-  const InputForm({super.key, @required this.text, @required this.color, this.maxlines});
+  const InputForm(
+      {super.key, @required this.text, @required this.color, this.maxlines});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       width: 300,
       child: TextFormField(
         maxLines: maxlines,
         focusNode: FocusNode(canRequestFocus: false),
         decoration: InputDecoration(
-          hintText: text,
-          hintStyle: GoogleFonts.poppins(fontSize: 14),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: color),
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide:  BorderSide(color: Colors.redAccent,width: 2),
-            borderRadius: BorderRadius.all(Radius.circular(15.0))
-          )
-        ),
+            hintText: text,
+            hintStyle: GoogleFonts.poppins(fontSize: 14),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: color),
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                borderRadius: BorderRadius.all(Radius.circular(15.0)))),
       ),
     );
   }
 }
-
-

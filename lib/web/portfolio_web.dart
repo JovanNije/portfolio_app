@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protfolio_app/components.dart';
-import 'package:protfolio_app/web/AboutMe.dart';
+import 'package:protfolio_app/web/about_web.dart';
 
 class PortfolioWeb extends StatefulWidget {
+
   const PortfolioWeb({super.key});
 
   @override
