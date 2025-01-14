@@ -195,6 +195,12 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
     return SlideTransition(
       position: _animation,
       child: Container(
+        constraints: BoxConstraints(
+          maxHeight: 350,
+          maxWidth: 400,
+          minWidth: 350,
+          minHeight:300,
+        ),
         width: MediaQuery.of(context).size.width / 3 - 150, // Adjust width
         child: Card(
           elevation: 30,
