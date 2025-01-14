@@ -28,8 +28,11 @@ class _PortfolioWebState extends State<PortfolioWeb> {
             height: heightDevice,
             padding: EdgeInsets.all(20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min, // Ensures Row only takes as much space as needed
               children: [
+                // Column containing text information
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +54,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     SizedBox(height: 15),
                     Poppins("Flutter developer", 30),
                     SizedBox(height: 15),
-                    // email
+                    // Email
                     Row(
                       children: [
                         Icon(Icons.email, color: Colors.redAccent),
@@ -60,7 +63,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    // phone
+                    // Phone
                     Row(
                       children: [
                         Icon(Icons.phone, color: Colors.redAccent),
@@ -69,17 +72,18 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       ],
                     ),
                     SizedBox(height: 10),
-                    // address
+                    // Address
                     Row(
                       children: [
                         Icon(Icons.location_pin, color: Colors.redAccent),
                         SizedBox(width: 10),
                         PoppinsBold("Gojsovac 66", 15),
-                        SizedBox(height: 10),
                       ],
                     ),
                   ],
                 ),
+                SizedBox(width: 20), // Add some spacing between the text and the avatar
+                // CircleAvatar for profile picture
                 CircleAvatar(
                   radius: 104.0,
                   backgroundColor: Colors.greenAccent,
