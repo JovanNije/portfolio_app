@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'web/portfolio_web.dart';
 
+//web section
 class TabsWeb extends StatefulWidget {
   final title;
   const TabsWeb(this.title, {super.key});
@@ -199,7 +200,7 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
           maxHeight: 350,
           maxWidth: 400,
           minWidth: 350,
-          minHeight:300,
+          minHeight: 300,
         ),
         width: MediaQuery.of(context).size.width / 3 - 150, // Adjust width
         child: Card(
@@ -256,6 +257,36 @@ class InputForm extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.redAccent, width: 2),
                 borderRadius: BorderRadius.all(Radius.circular(15.0)))),
       ),
+    );
+  }
+}
+//mobile section
+
+class TabsMobile extends StatefulWidget {
+  final text;
+  final route;
+  const TabsMobile({super.key, @required this.text, @required this.route});
+
+  @override
+  State<TabsMobile> createState() => _TabsMobileState();
+}
+
+class _TabsMobileState extends State<TabsMobile> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      elevation: 20.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      height: 50.0,
+      minWidth: 200.0,
+      color: Colors.black,
+      child: Text(
+        widget.text,
+        style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+      ),
+      onPressed: () {},
     );
   }
 }
