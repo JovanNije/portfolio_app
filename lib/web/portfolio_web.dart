@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protfolio_app/components.dart';
 import 'package:protfolio_app/web/about_web.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioWeb extends StatefulWidget {
   const PortfolioWeb({super.key});
@@ -17,7 +19,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
     var heightWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      drawer: Drawer(),
+      drawer: MyDrawer(),
       backgroundColor: Colors.white,
       appBar: MyAppBar(),
       body: ListView(
@@ -30,7 +32,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min, // Ensures Row only takes as much space as needed
+              mainAxisSize: MainAxisSize
+                  .min, // Ensures Row only takes as much space as needed
               children: [
                 // Column containing text information
                 Column(
@@ -46,7 +49,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                           bottomRight: Radius.circular(20.0),
                         ),
                       ),
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: PoppinsBold("Hello I'm", 15),
                     ),
                     SizedBox(height: 15),
@@ -82,7 +86,9 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     ),
                   ],
                 ),
-                SizedBox(width: 20), // Add some spacing between the text and the avatar
+                SizedBox(
+                    width:
+                        20), // Add some spacing between the text and the avatar
                 // CircleAvatar for profile picture
                 CircleAvatar(
                   radius: 104.0,
@@ -93,7 +99,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 100.0,
-                      backgroundImage: AssetImage("assets/profile_icon_circle.png"),
+                      backgroundImage:
+                          AssetImage("assets/profile_icon_circle.png"),
                     ),
                   ),
                 ),
@@ -137,13 +144,18 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       SizedBox(height: 30),
                       PoppinsBold("About Me", 30),
                       SizedBox(height: 15),
-                      Poppins("Hello! I'm Jovan and I specialize in Flutter development.", 15),
-                      Poppins("I build beautiful and responsive apps for all platforms.", 15),
+                      Poppins(
+                          "Hello! I'm Jovan and I specialize in Flutter development.",
+                          15),
+                      Poppins(
+                          "I build beautiful and responsive apps for all platforms.",
+                          15),
                       SizedBox(height: 15),
                       Wrap(
                         children: [
                           BorderedTextPoppins("flutter", 15, Colors.redAccent),
-                          BorderedTextPoppins("Firebase", 15, Colors.greenAccent),
+                          BorderedTextPoppins(
+                              "Firebase", 15, Colors.greenAccent),
                           BorderedTextPoppins("Laravel", 15, Colors.blueAccent),
                           BorderedTextPoppins("MySQL", 15, Colors.purpleAccent),
                         ],
@@ -207,18 +219,22 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        InputForm(text: "Your full Name:", color: Colors.redAccent),
+                        InputForm(
+                            text: "Your full Name:", color: Colors.redAccent),
                         SizedBox(height: 60),
-                        InputForm(text: "Your number:", color: Colors.redAccent),
+                        InputForm(
+                            text: "Your number:", color: Colors.redAccent),
                         SizedBox(height: 60),
                       ],
                     ),
+                    SizedBox(width: 60),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         InputForm(text: "Your email:", color: Colors.redAccent),
                         SizedBox(height: 60),
-                        InputForm(text: "Your address:", color: Colors.redAccent),
+                        InputForm(
+                            text: "Your address:", color: Colors.redAccent),
                       ],
                     ),
                   ],
@@ -237,7 +253,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.redAccent, width: 2),
+                        borderSide:
+                            BorderSide(color: Colors.redAccent, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       ),
                     ),

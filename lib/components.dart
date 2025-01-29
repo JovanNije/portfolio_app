@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/gestures.dart';
 import 'web/portfolio_web.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //web section
 class TabsWeb extends StatefulWidget {
@@ -287,6 +289,99 @@ class _TabsMobileState extends State<TabsMobile> {
         style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
       ),
       onPressed: () {},
+    );
+  }
+}
+
+class MyDrawer extends StatefulWidget {
+  const MyDrawer({super.key});
+
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DrawerHeader(
+              padding: EdgeInsets.only(bottom: 20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 2.0, color: Colors.black)),
+                child: Image.asset("assets/profile_icon_circle.png"),
+              )),
+          TabsMobile(text: "Home", route: '/'),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Work", route: '/works'),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Blog", route: '/blog'),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "About", route: '/about'),
+          SizedBox(height: 20.0),
+          TabsMobile(text: "Contact", route: '/contact'),
+          SizedBox(height: 40.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () async => await _launchInBrowser(
+                    Uri.parse("https://www.instagram.com/jovanlontos03")),
+                icon: SvgPicture.asset(
+                  "instagram.svg",
+                  width: 35,
+                  height: 35,
+                  colorFilter: ColorFilter.mode(
+                    Colors.purpleAccent,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () async =>
+                    await _launchInBrowser(Uri.parse("https://x.com")),
+                icon: SvgPicture.asset(
+                  "twitter.svg",
+                  width: 35,
+                  height: 35,
+                  colorFilter: ColorFilter.mode(
+                    Colors.blueAccent,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                color: Colors.redAccent,
+              ),
+              IconButton(
+                onPressed: () async => await _launchInBrowser(
+                    Uri.parse("https://https://github.com/JovanNije")),
+                icon: SvgPicture.asset(
+                  "github.svg",
+                  width: 35,
+                  height: 35,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black,
+                    BlendMode.srcIn,
+                  ),
+                ),
+                color: Colors.redAccent,
+              )
+            ],
+          )
+        ],
+      ),
     );
   }
 }
