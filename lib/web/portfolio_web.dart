@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:protfolio_app/components.dart';
-import 'package:protfolio_app/web/about_web.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioWeb extends StatefulWidget {
   const PortfolioWeb({super.key});
@@ -135,7 +132,7 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                 ),
                 SizedBox(width: 60),
                 // About Me Column
-                Container(
+                SizedBox(
                   width: heightWidth * 0.3,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,21 +176,21 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                   spacing: 30,
                   runSpacing: 30,
                   children: [
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/flutter.png",
                       text: "Frontend development",
                       fit: BoxFit.fill,
                       reverse: true,
-                      color: Colors.purpleAccent,
+                      color: Colors.blueAccent,
                     ),
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/firebase.png",
                       text: "Databases",
                       fit: BoxFit.contain,
                       reverse: true,
-                      color: Colors.blueAccent,
+                      color: Colors.purpleAccent,
                     ),
-                    AnimatedCardWeb(
+                    AnimatedCard(
                       imagePath: "assets/laravel.png",
                       text: "Backend development",
                       fit: BoxFit.fill,
@@ -239,8 +236,8 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     ),
                   ],
                 ),
-                SizedBox(height: 60),
-                Container(
+                SizedBox(height: 30),
+                SizedBox(
                   width: 500,
                   child: TextFormField(
                     maxLines: 6,
@@ -260,6 +257,18 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     ),
                   ),
                 ),
+                SizedBox(height: 30),
+                MaterialButton(
+                  onPressed: () {},
+                  elevation: 20.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(10.0)),
+                  height: 60.0,
+                  minWidth: 300,
+                  color: Colors.greenAccent,
+                  child: PoppinsBold("Submit", 20.0),
+                ),
+                SizedBox(height: 35.0)
               ],
             ),
           ),

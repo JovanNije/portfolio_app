@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:protfolio_app/components.dart';
-import 'portfolio_web.dart';
 class AboutMe extends StatelessWidget {
   const AboutMe({super.key});
 

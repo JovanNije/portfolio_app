@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/gestures.dart';
-import 'web/portfolio_web.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //web section
 class TabsWeb extends StatefulWidget {
   final title;
-  const TabsWeb(this.title, {super.key});
+  final route;
+  const TabsWeb({super.key, this.title, this.route});
 
   @override
   State<TabsWeb> createState() => _TabsWebState();
@@ -19,33 +18,38 @@ class _TabsWebState extends State<TabsWeb> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          isSelected = true;
-        });
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(widget.route);
       },
-      onExit: (_) {
-        setState(() {
-          isSelected = false;
-        });
-      },
-      child: AnimatedDefaultTextStyle(
-        duration: const Duration(milliseconds: 100),
-        curve: Curves.elasticIn,
-        style: isSelected
-            ? GoogleFonts.kanit(
-                shadows: [
-                    Shadow(color: Colors.redAccent, offset: Offset(0, -8))
-                  ],
-                color: Colors.transparent,
-                fontSize: 25.0,
-                decoration: TextDecoration.underline,
-                decorationThickness: 1,
-                decorationColor: Colors.black)
-            : GoogleFonts.kanit(color: Colors.black, fontSize: 23.0),
-        child: Text(
-          widget.title,
+      child: MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            isSelected = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isSelected = false;
+          });
+        },
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.elasticIn,
+          style: isSelected
+              ? GoogleFonts.kanit(
+                  shadows: [
+                      Shadow(color: Colors.redAccent, offset: Offset(0, -8))
+                    ],
+                  color: Colors.transparent,
+                  fontSize: 25.0,
+                  decoration: TextDecoration.underline,
+                  decorationThickness: 1,
+                  decorationColor: Colors.black)
+              : GoogleFonts.kanit(color: Colors.black, fontSize: 23.0),
+          child: Text(
+            widget.title,
+          ),
         ),
       ),
     );
@@ -72,24 +76,11 @@ class _MyAppBarState extends State<MyAppBar> {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GestureDetector(
-            child: const TabsWeb("Home"),
-            onTap: () {
-              // Check if the current route is not the home route
-              if (ModalRoute.of(context)?.settings.name != '/') {
-                // If we're not on the home route, navigate to the home route
-                Navigator.pushNamed(context, '/');
-              }
-              // If we are on the home route, do nothing (no pop or navigate)
-            },
-          ),
-          TabsWeb("Works"),
-          TabsWeb("Blog"),
-          GestureDetector(
-            child: TabsWeb("About"),
-            onTap: () => {Navigator.of(context).pushNamed("/about")},
-          ),
-          TabsWeb("Contact"),
+          TabsWeb(title: "Home", route: '/'),
+          TabsWeb(title: "Works", route: '/works'),
+          TabsWeb(title: "Blog", route: '/blog'),
+          TabsWeb(title: "About", route: '/about'),
+          TabsWeb(title: "Contact", route: '/contact'),
         ],
       ),
     );
@@ -144,27 +135,31 @@ class BorderedTextPoppins extends StatelessWidget {
   }
 }
 
-class AnimatedCardWeb extends StatefulWidget {
+class AnimatedCard extends StatefulWidget {
   final String imagePath;
   final String text;
   final BoxFit fit;
   final bool reverse;
   final Color color;
+  final height;
+  final width;
 
-  const AnimatedCardWeb({
+  const AnimatedCard({
     super.key,
     required this.imagePath,
     required this.text,
     required this.fit,
     required this.reverse,
     required this.color,
+    this.height,
+    this.width,
   });
 
   @override
-  State<AnimatedCardWeb> createState() => _AnimatedCardWebState();
+  State<AnimatedCard> createState() => _AnimatedCardState();
 }
 
-class _AnimatedCardWebState extends State<AnimatedCardWeb>
+class _AnimatedCardState extends State<AnimatedCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
@@ -217,9 +212,9 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
             children: [
               Image.asset(
                 widget.imagePath,
-                height: 300,
-                width: double.infinity,
-                fit: widget.fit,
+                height: widget.height == null ? 300 : widget.height,
+                width: widget.width == null ? double.infinity : widget.width,
+                fit: widget.fit ?? widget.fit,
               ),
               SizedBox(height: 10),
               Padding(
@@ -235,16 +230,25 @@ class _AnimatedCardWebState extends State<AnimatedCardWeb>
 }
 
 class InputForm extends StatelessWidget {
-  final text;
-  final color;
-  final maxlines;
+  final String text;
+  final Color color;
+  final double? width;
+  final int? maxlines;
+
   const InputForm(
-      {super.key, @required this.text, @required this.color, this.maxlines});
+      {super.key,
+      required this.text,
+      required this.color,
+      this.maxlines,
+      this.width});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
+    // Set width to 300 if width is null
+    final finalWidth = width ?? 300.0;
+
+    return SizedBox(
+      width: finalWidth,
       child: TextFormField(
         maxLines: maxlines,
         focusNode: FocusNode(canRequestFocus: false),
@@ -262,6 +266,7 @@ class InputForm extends StatelessWidget {
     );
   }
 }
+
 //mobile section
 
 class TabsMobile extends StatefulWidget {
@@ -288,7 +293,9 @@ class _TabsMobileState extends State<TabsMobile> {
         widget.text,
         style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed(widget.route);
+      },
     );
   }
 }
