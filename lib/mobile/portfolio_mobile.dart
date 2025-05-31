@@ -25,7 +25,7 @@ class _PortfolioMobileState extends State<PortfolioMobile> {
 
   @override
   Widget build(BuildContext context) {
-    var withDevice = MediaQuery.of(context).size.width;
+    var widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.white,
@@ -179,23 +179,23 @@ class _PortfolioMobileState extends State<PortfolioMobile> {
                     PoppinsBold("Contact me", 35.0),
                     InputForm(
                         text: "First name",
-                        width: withDevice / 1.4,
+                        width: widthDevice / 1.4,
                         color: Colors.redAccent),
                     InputForm(
                         text: "Last name",
-                        width: withDevice / 1.4,
+                        width: widthDevice / 1.4,
                         color: Colors.redAccent),
                     InputForm(
                         text: "Email",
-                        width: withDevice / 1.4,
+                        width: widthDevice / 1.4,
                         color: Colors.redAccent),
                     InputForm(
                         text: "Phone number",
-                        width: withDevice / 1.4,
+                        width: widthDevice / 1.4,
                         color: Colors.redAccent),
                     InputForm(
                         text: "Message",
-                        width: withDevice / 1.4,
+                        width: widthDevice / 1.4,
                         color: Colors.redAccent,
                         maxlines: 5),
                     MaterialButton(
@@ -204,7 +204,7 @@ class _PortfolioMobileState extends State<PortfolioMobile> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadiusGeometry.circular(10.0)),
                       height: 60.0,
-                      minWidth: withDevice / 2.2,
+                      minWidth: widthDevice / 2.2,
                       color: Colors.greenAccent,
                       child: PoppinsBold("Submit", 20.0),
                     ),

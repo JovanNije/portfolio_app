@@ -217,10 +217,10 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         InputForm(
-                            text: "Your full Name:", color: Colors.redAccent),
+                            text: "Your full Name:", color: Colors.greenAccent),
                         SizedBox(height: 60),
                         InputForm(
-                            text: "Your number:", color: Colors.redAccent),
+                            text: "Your number:", color: Colors.greenAccent),
                         SizedBox(height: 60),
                       ],
                     ),
@@ -228,10 +228,10 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        InputForm(text: "Your email:", color: Colors.redAccent),
+                        InputForm(text: "Your email:", color: Colors.greenAccent),
                         SizedBox(height: 60),
                         InputForm(
-                            text: "Your address:", color: Colors.redAccent),
+                            text: "Your address:", color: Colors.greenAccent),
                       ],
                     ),
                   ],
@@ -246,12 +246,12 @@ class _PortfolioWebState extends State<PortfolioWeb> {
                       hintText: "Enter your message",
                       hintStyle: GoogleFonts.poppins(fontSize: 14),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.redAccent),
+                        borderSide: BorderSide(color: Colors.greenAccent),
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide:
-                            BorderSide(color: Colors.redAccent, width: 2),
+                            BorderSide(color: Colors.greenAccent, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       ),
                     ),

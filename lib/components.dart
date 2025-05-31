@@ -189,17 +189,17 @@ class _AnimatedCardState extends State<AnimatedCard>
 
   @override
   Widget build(BuildContext context) {
-    // Use the SlideTransition with the animation
     return SlideTransition(
       position: _animation,
       child: Container(
+        width: widget.width ?? MediaQuery.of(context).size.width / 3 - 150,
+        height: widget.height ?? 350,
         constraints: BoxConstraints(
-          maxHeight: 350,
-          maxWidth: 400,
-          minWidth: 350,
-          minHeight: 300,
+          minWidth: 200,
+          minHeight: 250,
+          maxWidth: 500,
+          maxHeight: 500,
         ),
-        width: MediaQuery.of(context).size.width / 3 - 150, // Adjust width
         child: Card(
           elevation: 30,
           shape: RoundedRectangleBorder(
@@ -208,18 +208,22 @@ class _AnimatedCardState extends State<AnimatedCard>
           ),
           shadowColor: widget.color,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                widget.imagePath,
-                height: widget.height == null ? 300 : widget.height,
-                width: widget.width == null ? double.infinity : widget.width,
-                fit: widget.fit ?? widget.fit,
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                  child: Image.asset(
+                    widget.imagePath,
+                    width: double.infinity,
+                    fit: widget.fit ?? BoxFit.cover,
+                  ),
+                ),
               ),
               SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                child: PoppinsBold(widget.text, 15),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                child: Center(child: PoppinsBold(widget.text, 15)),
               ),
             ],
           ),
